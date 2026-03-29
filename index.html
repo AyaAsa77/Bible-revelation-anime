@@ -19,6 +19,8 @@ body{
   justify-content:center;
   font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN',sans-serif;
   position:relative;
+  height:100vh;
+  overflow:hidden;
 }
 
 /* ===== STARFIELD ===== */
@@ -39,14 +41,19 @@ body{
 .scene{
   position:relative;z-index:1;
   width:min(780px,97vw);
+  height:100vh;
   display:flex;flex-direction:column;
   align-items:center;
-  gap:10px;
+  justify-content:center;
+  gap:8px;
+  padding:8px 0;
 }
 
 /* ===== BOOK ===== */
 .book{
   width:100%;
+  flex:1;
+  min-height:0;
   border-radius:20px;
   overflow:hidden;
   box-shadow:
@@ -56,13 +63,12 @@ body{
     inset 0 1px 0 rgba(255,235,150,.3);
   background:#fffdf2;
   position:relative;
-  /* page height responsive */
-  max-height:calc(100vh - 100px);
-  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
 }
 
 /* ===== PAGES ===== */
-.page{display:none;flex-direction:column;}
+.page{display:none;flex-direction:column;flex:1;min-height:0;overflow:hidden;}
 .page.active{display:flex;animation:pageIn .38s cubic-bezier(.4,0,.2,1);}
 @keyframes pageIn{
   from{opacity:0;transform:translateX(22px);}
@@ -72,18 +78,20 @@ body{
 /* ===== ILLUSTRATION AREA ===== */
 .illust{
   width:100%;
-  flex-shrink:0;
+  flex:0 0 56%;
+  min-height:0;
   position:relative;overflow:hidden;
-  /* height set per page via inline style */
 }
-.illust svg{width:100%;display:block;}
+.illust svg{width:100%;height:100%;display:block;}
 
 /* ===== TEXT AREA ===== */
 .textbox{
-  padding:18px 26px 20px;
+  padding:12px 26px 16px;
   background:#fffdf2;
   position:relative;
   flex:1;
+  min-height:0;
+  overflow-y:auto;
 }
 /* decorative top bar */
 .textbox::before{
@@ -94,33 +102,33 @@ body{
 }
 
 .ep-label{
-  font-size:.7rem;font-weight:700;
+  font-size:.68rem;font-weight:700;
   color:#c07800;letter-spacing:.14em;
-  margin-bottom:3px;margin-top:6px;
+  margin-bottom:2px;margin-top:5px;
 }
 .page-title{
   font-family:'Kaisei Decol',serif;
-  font-size:clamp(1.05rem,2.5vw,1.35rem);
+  font-size:clamp(.95rem,2vw,1.2rem);
   font-weight:700;color:#4a2800;
-  line-height:1.4;margin-bottom:10px;
+  line-height:1.35;margin-bottom:7px;
 }
 .story{
-  font-size:clamp(.95rem,2.2vw,1.06rem);
-  color:#3e2400;line-height:2;
+  font-size:clamp(.85rem,1.8vw,.98rem);
+  color:#3e2400;line-height:1.8;
 }
 .serif{font-family:'Kaisei Decol',serif;}
 
 /* dialogue */
 .dial{
   display:block;
-  margin:6px 0;
-  padding:5px 12px 5px 10px;
+  margin:4px 0;
+  padding:4px 10px 4px 8px;
   background:linear-gradient(120deg,#fff9e0,#fff3be);
   border-left:4px solid #ffb703;
   border-radius:0 10px 10px 0;
   font-weight:700;color:#4a2800;
-  font-size:clamp(.9rem,2.1vw,1rem);
-  line-height:1.7;
+  font-size:clamp(.82rem,1.8vw,.94rem);
+  line-height:1.6;
 }
 .who{font-size:.78rem;color:#c07000;margin-right:4px;}
 
@@ -133,10 +141,13 @@ body{
 /* ===== COVER special ===== */
 .cover-inner{
   background:radial-gradient(ellipse at 50% 30%,#2a1060 0%,#0d0830 55%,#050415 100%);
-  padding:30px 20px 28px;
+  padding:16px 20px 18px;
   display:flex;flex-direction:column;
-  align-items:center;gap:8px;
+  align-items:center;gap:6px;
   position:relative;overflow:hidden;
+  flex:1;
+  min-height:0;
+  justify-content:flex-end;
 }
 .cover-ep{
   font-size:.8rem;letter-spacing:.3em;color:#88aadd;font-weight:700;
@@ -159,13 +170,14 @@ body{
   width:100%;
   display:flex;align-items:center;justify-content:space-between;
   padding:0 2px;
+  flex-shrink:0;
 }
 .btn{
   background:linear-gradient(135deg,#ffb703,#e07800);
   color:#fff;border:none;
   border-radius:40px;
-  padding:10px 24px;
-  font-size:.95rem;font-family:inherit;font-weight:700;
+  padding:8px 20px;
+  font-size:.88rem;font-family:inherit;font-weight:700;
   cursor:pointer;
   box-shadow:0 4px 14px #e0780055;
   transition:transform .15s,box-shadow .15s;
@@ -209,7 +221,7 @@ body{
     <div class="page active" data-idx="0">
       <div class="cover-inner">
         <!-- animated stars -->
-        <svg width="100%" height="260" viewBox="0 0 780 260" style="position:absolute;top:0;left:0;pointer-events:none;">
+        <svg width="100%" height="100%" viewBox="0 0 780 260" style="position:absolute;top:0;left:0;pointer-events:none;">
           <defs>
             <radialGradient id="cg" cx="50%" cy="35%" r="55%">
               <stop offset="0%" stop-color="#4a2090" stop-opacity=".5"/>
@@ -277,7 +289,7 @@ body{
         </svg>
 
         <!-- content -->
-        <div style="height:220px"></div>
+        <div style="flex:1"></div>
         <div class="cover-ep">✦ 第1話 ✦</div>
         <div class="cover-title">ゆめのしまから<br>はじまるぼうけん</div>
         <div class="cover-sub">ヨハネと光の使者たち</div>
@@ -289,8 +301,8 @@ body{
          PAGE 1 — Yohane alone at sunset
     ══════════════════════════════════════ -->
     <div class="page" data-idx="1">
-      <div class="illust" style="height:280px;background:linear-gradient(180deg,#ff7f50 0%,#ffb347 30%,#ffe5b4 65%,#87ceeb 100%);">
-        <svg viewBox="0 0 780 280" xmlns="http://www.w3.org/2000/svg">
+      <div class="illust" style="background:linear-gradient(180deg,#ff7f50 0%,#ffb347 30%,#ffe5b4 65%,#87ceeb 100%);">
+        <svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 780 280" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stop-color="#ff6b35"/>
@@ -405,8 +417,8 @@ body{
          PAGE 2 — Yohane at night, missing friends
     ══════════════════════════════════════ -->
     <div class="page" data-idx="2">
-      <div class="illust" style="height:280px;background:linear-gradient(180deg,#0a0a2e 0%,#1a1a50 50%,#0d2a0d 100%);">
-        <svg viewBox="0 0 780 280" xmlns="http://www.w3.org/2000/svg">
+      <div class="illust" style="background:linear-gradient(180deg,#0a0a2e 0%,#1a1a50 50%,#0d2a0d 100%);">
+        <svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 780 280" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stop-color="#fffbe0" stop-opacity=".9"/>
@@ -541,8 +553,8 @@ body{
          PAGE 3 — Sky lights up / Yohane startled
     ══════════════════════════════════════ -->
     <div class="page" data-idx="3">
-      <div class="illust" style="height:280px;background:#08051a;">
-        <svg viewBox="0 0 780 280" xmlns="http://www.w3.org/2000/svg">
+      <div class="illust" style="background:#08051a;">
+        <svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 780 280" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="burst" cx="50%" cy="45%" r="48%">
               <stop offset="0%" stop-color="#fff" stop-opacity=".95"/>
@@ -640,8 +652,8 @@ body{
          PAGE 4 — Rumi appears!
     ══════════════════════════════════════ -->
     <div class="page" data-idx="4">
-      <div class="illust" style="height:295px;background:linear-gradient(180deg,#1a0840 0%,#2a1060 40%,#0d1830 100%);">
-        <svg viewBox="0 0 780 295" xmlns="http://www.w3.org/2000/svg">
+      <div class="illust" style="background:linear-gradient(180deg,#1a0840 0%,#2a1060 40%,#0d1830 100%);">
+        <svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 780 295" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="rumiHalo" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stop-color="#fff" stop-opacity=".95"/>
@@ -790,8 +802,8 @@ body{
          PAGE 5 — Heaven's Door opens
     ══════════════════════════════════════ -->
     <div class="page" data-idx="5">
-      <div class="illust" style="height:290px;background:linear-gradient(180deg,#0a0820 0%,#1a1050 50%,#101828 100%);">
-        <svg viewBox="0 0 780 290" xmlns="http://www.w3.org/2000/svg">
+      <div class="illust" style="background:linear-gradient(180deg,#0a0820 0%,#1a1050 50%,#101828 100%);">
+        <svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 780 290" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="gateGlowBig" cx="50%" cy="50%" r="55%">
               <stop offset="0%" stop-color="#fff" stop-opacity=".98"/>
@@ -909,8 +921,8 @@ body{
          PAGE 6 — Heaven's Great Hall
     ══════════════════════════════════════ -->
     <div class="page" data-idx="6">
-      <div class="illust" style="height:295px;background:linear-gradient(180deg,#fff9d0 0%,#ffe87c 35%,#ffd060 70%,#ffb703 100%);">
-        <svg viewBox="0 0 780 295" xmlns="http://www.w3.org/2000/svg">
+      <div class="illust" style="background:linear-gradient(180deg,#fff9d0 0%,#ffe87c 35%,#ffd060 70%,#ffb703 100%);">
+        <svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 780 295" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="throneGlow" cx="50%" cy="40%" r="50%">
               <stop offset="0%" stop-color="#fff" stop-opacity=".9"/>
@@ -1045,8 +1057,8 @@ body{
          PAGE 7 — Seven angels pop from stars!
     ══════════════════════════════════════ -->
     <div class="page" data-idx="7">
-      <div class="illust" style="height:295px;background:linear-gradient(180deg,#fff9d0 0%,#fffbe0 100%);">
-        <svg viewBox="0 0 780 295" xmlns="http://www.w3.org/2000/svg">
+      <div class="illust" style="background:linear-gradient(180deg,#fff9d0 0%,#fffbe0 100%);">
+        <svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 780 295" xmlns="http://www.w3.org/2000/svg">
           <rect width="780" height="295" fill="#fffcf0"/>
           <!-- 7 color burst lines from center top -->
           <g opacity=".12">
@@ -1209,8 +1221,8 @@ body{
          PAGE 8 — Mission + Writing. End of ep1
     ══════════════════════════════════════ -->
     <div class="page" data-idx="8">
-      <div class="illust" style="height:295px;background:linear-gradient(180deg,#fff9d0 0%,#fffbe0 100%);">
-        <svg viewBox="0 0 780 295" xmlns="http://www.w3.org/2000/svg">
+      <div class="illust" style="background:linear-gradient(180deg,#fff9d0 0%,#fffbe0 100%);">
+        <svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 780 295" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="voiceGlow" cx="55%" cy="35%" r="45%">
               <stop offset="0%" stop-color="#fffbe0" stop-opacity=".9"/>
